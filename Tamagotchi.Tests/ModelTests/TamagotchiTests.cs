@@ -41,5 +41,16 @@ namespace Tamagotchi.Tests
       Assert.AreEqual(110, testTamagotchi.Attention);
       Assert.AreEqual(95, testTamagotchi.Rest);
     }
+    [TestMethod]
+    public void LetRest_GiveTamagotchiRest_ReturnUpdatedValue()
+    {
+      TamagotchiPet testTamagotchi = new TamagotchiPet("Yoshi", 100, 100, 100);
+
+      testTamagotchi.letRest();
+
+      Assert.AreEqual(80, testTamagotchi.Food);
+      Assert.AreEqual(90, testTamagotchi.Attention);
+      Assert.AreEqual(120, testTamagotchi.Rest);
+    }
   }
 }

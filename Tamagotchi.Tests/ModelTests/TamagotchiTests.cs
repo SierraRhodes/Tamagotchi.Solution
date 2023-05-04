@@ -6,8 +6,12 @@ using System;
 namespace Tamagotchi.Tests
 {
   [TestClass]
-  public class TamagotchiTests 
+  public class TamagotchiTests : IDisposable
   {
+    public void Dispose()
+    {
+      TamagotchiPet.ClearAll();
+    }
     [TestMethod]
     public void InstantiateTamagotchi_CreateInstance_ReturnInstance()
     {
@@ -35,7 +39,7 @@ namespace Tamagotchi.Tests
     {
       TamagotchiPet testTamagotchi = new TamagotchiPet("Yoshi", 100, 100, 100);
 
-      testTamagotchi.giveAttention();
+      testTamagotchi.GiveAttention();
 
       Assert.AreEqual(90, testTamagotchi.Food);
       Assert.AreEqual(110, testTamagotchi.Attention);
@@ -46,11 +50,24 @@ namespace Tamagotchi.Tests
     {
       TamagotchiPet testTamagotchi = new TamagotchiPet("Yoshi", 100, 100, 100);
 
-      testTamagotchi.letRest();
+      testTamagotchi.LetRest();
 
       Assert.AreEqual(80, testTamagotchi.Food);
       Assert.AreEqual(90, testTamagotchi.Attention);
       Assert.AreEqual(120, testTamagotchi.Rest);
     }
+
+    [TestMethod]
+    public void GetAll_ListOfTamagotchis_ReturnTamagotchis()
+    {
+      TamagotchiPet.ClearAll();
+      List<TamagotchiPet> expected = new List<TamagotchiPet>();
+      expected.Add(new TamagotchiPet("Yoshi", 100, 100, 100));
+      expected.Add(new TamagotchiPet("Mario", 100, 100, 100));
+      expected.Add(new TamagotchiPet("Luigi", 100, 100, 100));
+
+      List<TamagotchiPet> actual = TamagotchiPet.GetAll();
+    }
+
   }
 }
